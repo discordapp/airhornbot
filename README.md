@@ -6,7 +6,13 @@ Airhorn Bot has two components, a bot client that handles the playing of loyal a
 
 
 ### Running the Bot
-First install the bot: `go install github.com/hammerandchisel/airhornbot`, then run the following command:
+
+**First install the bot:**
+```
+go get github.com/hammerandchisel/airhornbot/cmd/bot
+go install github.com/hammerandchisel/airhornbot/cmd/bot
+```
+ **Then run the following command:**
 
 ```
 ./airhornbot -r "localhost:6379" -t "MY_BOT_ACCOUNT_TOKEN" -o OWNER_ID
