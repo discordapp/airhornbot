@@ -264,6 +264,7 @@ func (s *Sound) Load(c *SoundCollection) error {
 	err = ffmpeg.Start()
 	if err != nil {
 		fmt.Println("RunStart Error:", err)
+		ffmpeg.Wait()
 		return err
 	}
 
@@ -274,11 +275,13 @@ func (s *Sound) Load(c *SoundCollection) error {
 
 		// If this is the end of the file, just return
 		if err == io.EOF || err == io.ErrUnexpectedEOF {
+			ffmpeg.Wait()
 			return nil
 		}
 
 		if err != nil {
 			fmt.Println("error reading from ffmpeg stdout :", err)
+			ffmpeg.Wait()
 			return err
 		}
 
