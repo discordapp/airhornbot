@@ -8,7 +8,6 @@ import (
 	"io"
 	"math/rand"
 	"os"
-	"os/exec"
 	"os/signal"
 	"runtime"
 	"strconv"
@@ -19,7 +18,6 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/bwmarrin/discordgo"
 	"github.com/dustin/go-humanize"
-	"github.com/layeh/gopus"
 	redis "gopkg.in/redis.v3"
 )
 
@@ -76,9 +74,6 @@ type Sound struct {
 
 	// Delay (in milliseconds) for the bot to wait before sending the disconnect request
 	PartDelay int
-
-	// Channel used for the encoder routine
-	encodeChan chan []int16
 
 	// Buffer to store encoded PCM packets
 	buffer [][]byte
@@ -188,7 +183,6 @@ func createSound(Name string, Weight int, PartDelay int) *Sound {
 		Name:       Name,
 		Weight:     Weight,
 		PartDelay:  PartDelay,
-		encodeChan: make(chan []int16, 10),
 		buffer:     make([][]byte, 0),
 	}
 }
@@ -216,77 +210,45 @@ func (s *SoundCollection) Random() *Sound {
 	return nil
 }
 
-// Encode reads data from ffmpeg and encodes it using gopus
-func (s *Sound) Encode() {
-	encoder, err := gopus.NewEncoder(48000, 2, gopus.Audio)
-	if err != nil {
-		fmt.Println("NewEncoder Error:", err)
-		return
-	}
-
-	encoder.SetBitrate(BITRATE * 1000)
-	encoder.SetApplication(gopus.Audio)
-
-	for {
-		pcm, ok := <-s.encodeChan
-		if !ok {
-			// if chan closed, exit
-			return
-		}
-
-		// try encoding pcm frame with Opus
-		opus, err := encoder.Encode(pcm, 960, 960*2*2)
-		if err != nil {
-			fmt.Println("Encoding Error:", err)
-			return
-		}
-
-		// Append the PCM frame to our buffer
-		s.buffer = append(s.buffer, opus)
-	}
-}
-
-// Load attempts to load and encode a sound file from disk
+// Load attempts to load an encoded sound file from disk
 func (s *Sound) Load(c *SoundCollection) error {
-	s.encodeChan = make(chan []int16, 10)
-	defer close(s.encodeChan)
-	go s.Encode()
+	path := fmt.Sprintf("audio/%v_%v.dca", c.Prefix, s.Name)
 
-	path := fmt.Sprintf("audio/%v_%v.wav", c.Prefix, s.Name)
-	ffmpeg := exec.Command("ffmpeg", "-i", path, "-f", "s16le", "-ar", "48000", "-ac", "2", "pipe:1")
+	file, err := os.Open(path)
 
-	stdout, err := ffmpeg.StdoutPipe()
 	if err != nil {
-		fmt.Println("StdoutPipe Error:", err)
+		fmt.Println("error opening dca file :", err)
 		return err
 	}
 
-	err = ffmpeg.Start()
-	if err != nil {
-		fmt.Println("RunStart Error:", err)
-		ffmpeg.Wait()
-		return err
-	}
+	var opuslen int16
 
 	for {
-		// read data from ffmpeg stdout
-		InBuf := make([]int16, 960*2)
-		err = binary.Read(stdout, binary.LittleEndian, &InBuf)
+		// read opus frame length from dca file
+		err = binary.Read(file, binary.LittleEndian, &opuslen)
 
 		// If this is the end of the file, just return
 		if err == io.EOF || err == io.ErrUnexpectedEOF {
-			ffmpeg.Wait()
 			return nil
 		}
 
 		if err != nil {
-			fmt.Println("error reading from ffmpeg stdout :", err)
-			ffmpeg.Wait()
+			fmt.Println("error reading from dca file :", err)
 			return err
 		}
 
-		// write pcm data to the encodeChan
-		s.encodeChan <- InBuf
+		// read encoded pcm from dca file
+		InBuf := make([]byte, opuslen)
+		err = binary.Read(file, binary.LittleEndian, &InBuf)
+
+		// Should not be any end of file errors
+		if err != nil {
+			fmt.Println("error reading from dca file :", err)
+			return err
+		}
+
+		// append encoded pcm data to the buffer
+		s.buffer = append(s.buffer, InBuf)
 	}
 }
 
