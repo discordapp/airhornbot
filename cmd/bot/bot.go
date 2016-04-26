@@ -211,6 +211,10 @@ func (s *SoundCollection) Random() *Sound {
 }
 
 // Load attempts to load an encoded sound file from disk
+// DCA files are pre-computed sound files that are easy to send to Discord.
+// If you would like to create your own DCA files, please use:
+// https://github.com/nstafie/dca-rs
+// eg: dca-rs --raw -i <input wav file> > <output file>
 func (s *Sound) Load(c *SoundCollection) error {
 	path := fmt.Sprintf("audio/%v_%v.dca", c.Prefix, s.Name)
 
