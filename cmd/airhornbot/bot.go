@@ -169,12 +169,27 @@ var COW *SoundCollection = &SoundCollection{
 	},
 }
 
+var TRUMP *SoundCollection = &SoundCollection{
+	Prefix: "trump",
+	Commands: []string{
+		"!trump",
+	},
+	Sounds: []*Sound{
+		createSound("mess", 10, 250),
+		createSound("bing", 3, 250),
+		createSound("getitout", 1, 250),
+		createSound("tractor", 3, 250),
+		createSound("worstpres", 3, 250),
+	},
+}
+
 var COLLECTIONS []*SoundCollection = []*SoundCollection{
 	AIRHORN,
 	KHALED,
 	CENA,
 	ETHAN,
 	COW,
+	TRUMP,
 }
 
 // Create a Sound struct

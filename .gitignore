@@ -8,3 +8,4 @@ web
 requests.log
 dist
 node_modules
+dump.rdb

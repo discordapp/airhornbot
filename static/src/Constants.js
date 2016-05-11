@@ -37,7 +37,7 @@ export default {
   },
 
   Audio: {
-    AIRHORN: require('../../audio/airhorn_default.wav')
+    AIRHORN: require('../../audio/airhorn_default.dca')
   },
 
   Animation: {
