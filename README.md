@@ -42,7 +42,7 @@ Once the web server is running you can visit it at `http://localhost:14000` to a
 
 After adding / permitting the bot on your Discord server you can then run the bot to process requests with
 ```
-bot -r "localhost:6379" -t "MY_BOT_ACCOUNT_TOKEN" -o OWNER_ID
+airhornbot -r "localhost:6379" -t "MY_BOT_ACCOUNT_TOKEN" -o OWNER_ID
 ```
 This is what will process the commands, it must be running for the bot to respond in Discord.
 
