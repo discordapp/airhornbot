@@ -1,16 +1,22 @@
-BOT_BINARY=bot
-WEB_BINARY=web
+BOT_DIR=cmd/airhornbot
+WEB_DIR=cmd/airhornweb
+BOT_BINARY=${GOPATH}/bin/airhornbot
+WEB_BINARY=${GOPATH}/bin/airhornweb
 
 JS_FILES = $(shell find static/src/ -type f -name '*.js')
 
+default: all
+
 .PHONY: all
-all: bot web
+all: bot web npm gulp
 
-bot: cmd/bot/bot.go
-	go build -o ${BOT_BINARY} cmd/bot/bot.go
+bot: cmd/airhornbot/bot.go
+	cd ${BOT_DIR} && go get && \
+    go build -o ${BOT_BINARY} bot.go
 
-web: cmd/webserver/web.go static
-	go build -o ${WEB_BINARY} cmd/webserver/web.go
+web: cmd/airhornweb/web.go static
+	cd ${WEB_DIR} && go get && \
+	go build -o ${WEB_BINARY} web.go
 
 npm: static/package.json
 	cd static && npm install .
@@ -23,4 +29,4 @@ static: npm gulp
 
 .PHONY: clean
 clean:
-	rm -r ${BOT_BINARY} ${WEB_BINARY} static/dist/
+	rm -rf ${BOT_BINARY} ${WEB_BINARY} static/dist/ cmd/airhorn*/dump.rdb

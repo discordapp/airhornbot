@@ -46,7 +46,7 @@ function getWebpackOptions(debug) {
           loader: 'babel',
           query: babelOptions
         },
-        {test: /\.(png|svg|ogv|mp4|webm|wav)$/, loader: 'file'}
+        {test: /\.(png|dca|svg|ogv|mp4|webm|wav)$/, loader: 'file'}
       ]
     },
     stylus: {
@@ -129,8 +129,9 @@ gulp.task('dist', ['build'], () => {
   require('babel-register')(babelOptions);
   require.extensions['.styl'] = () => {};
   require.extensions['.svg'] = require.extensions['.png'] =
-    require.extensions['.mp4'] = require.extensions['.wav'] =
-    require.extensions['.ogv'] = require.extensions['.webm'] = (module, filename) => {
+    require.extensions['.mp4'] = require.extensions['.dca'] =
+    require.extensions['.wav'] = require.extensions['.ogv'] =
+    require.extensions['.webm'] = (module, filename) => {
       module.exports = findAsset(filename);
     };
 

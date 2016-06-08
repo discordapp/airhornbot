@@ -169,6 +169,21 @@ var COW *SoundCollection = &SoundCollection{
 	},
 }
 
+var TRUMP *SoundCollection = &SoundCollection{
+	Prefix: "trump",
+	Commands: []string{
+		"!trump",
+	},
+	Sounds: []*Sound{
+		createSound("mess", 8, 250),
+		createSound("wall", 10, 250),
+		createSound("bing", 3, 250),
+		createSound("getitout", 1, 250),
+		createSound("tractor", 3, 250),
+		createSound("worstpres", 3, 250),
+	},
+}
+
 var BIRTHDAY *SoundCollection = &SoundCollection{
 	Prefix: "birthday",
 	Commands: []string{
@@ -189,6 +204,7 @@ var COLLECTIONS []*SoundCollection = []*SoundCollection{
 	CENA,
 	ETHAN,
 	COW,
+	TRUMP,
 	BIRTHDAY,
 }
 
