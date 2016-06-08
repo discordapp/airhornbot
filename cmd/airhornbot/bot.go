@@ -175,7 +175,8 @@ var TRUMP *SoundCollection = &SoundCollection{
 		"!trump",
 	},
 	Sounds: []*Sound{
-		createSound("mess", 10, 250),
+		createSound("mess", 8, 250),
+		createSound("wall", 10, 250),
 		createSound("bing", 3, 250),
 		createSound("getitout", 1, 250),
 		createSound("tractor", 3, 250),
