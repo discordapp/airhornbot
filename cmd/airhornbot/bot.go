@@ -183,7 +183,7 @@ var TRUMP *SoundCollection = &SoundCollection{
 	},
 }
 
-var BRTHDAY *SoundCollection = &SoundCollection{
+var BIRTHDAY *SoundCollection = &SoundCollection{
 	Prefix: "birthday",
 	Commands: []string{
 		"!birthday",
