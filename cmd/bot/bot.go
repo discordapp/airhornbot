@@ -191,6 +191,19 @@ var WOW *SoundCollection = &SoundCollection{
 	},
 }
 
+var POKE *SoundCollection = &SoundCollection{
+	Prefix: "poke",
+	Commands: []string{
+		"!poke",
+	},
+	Sounds: []*Sound{
+		createSound("attack", 50, 250),
+		createSound("psy", 50, 250),
+		createSound("psyduck", 50, 250),
+		createSound("psyayeayeduck", 50, 250),
+	},
+}
+
 var COLLECTIONS []*SoundCollection = []*SoundCollection{
 	AIRHORN,
 	KHALED,
@@ -199,6 +212,7 @@ var COLLECTIONS []*SoundCollection = []*SoundCollection{
 	COW,
 	BIRTHDAY,
 	WOW,
+	POKE,
 }
 
 // Create a Sound struct
