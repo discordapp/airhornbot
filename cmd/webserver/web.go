@@ -236,19 +236,19 @@ func main() {
 	var (
 		ClientID     = flag.String("i", "", "OAuth2 Client ID")
 		ClientSecret = flag.String("s", "", "OAtuh2 Client Secret")
-		err          error
+		// err          error
 	)
 	flag.Parse()
 
 	// Load the HTML static page
-	data, err := ioutil.ReadFile("templates/index.html")
-	if err != nil {
-		log.WithFields(log.Fields{
-			"error": err,
-		}).Error("Failed to open index.html")
-		return
-	}
-	htmlIndexPage = string(data)
+	// data, err := ioutil.ReadFile("templates/index.html")
+	// if err != nil {
+	// 	log.WithFields(log.Fields{
+	// 		"error": err,
+	// 	}).Error("Failed to open index.html")
+	// 	return
+	// }
+	// htmlIndexPage = string(data)
 
 	// Create a cookie store
 	store = sessions.NewCookieStore([]byte(*ClientSecret))
