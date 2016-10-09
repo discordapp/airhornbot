@@ -565,14 +565,19 @@ func utilGetMentioned(s *discordgo.Session, m *discordgo.MessageCreate) *discord
 
 func airhornBomb(cid string, guild *discordgo.Guild, user *discordgo.User, cs string) {
 	count, _ := strconv.Atoi(cs)
-	discord.ChannelMessageSend(cid, ":ok_hand:"+strings.Repeat(":trumpet:", count))
 
-	// Cap it at something
-	if count > 100 {
+	// Cap it at something & prevent crashes
+	if count > 100 || count < 1 {
 		return
 	}
 
+	discord.ChannelMessageSend(cid, ":ok_hand:"+strings.Repeat(":trumpet:", count))
+
 	play := createPlay(user, guild, AIRHORN, nil)
+	// Can't find user, exit and don't crash
+	if play == nil {
+		return
+	}
 	vc, err := discord.ChannelVoiceJoin(play.GuildID, play.ChannelID, true, true)
 	if err != nil {
 		return
