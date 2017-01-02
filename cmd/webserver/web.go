@@ -375,7 +375,7 @@ func main() {
 		ClientSecret: *ClientSecret,
 		Scopes:       []string{"bot", "identify"},
 		Endpoint:     endpoint,
-		RedirectURL:  "https://airhornbot.com/callback",
+		RedirectURL:  "https://airhorn.solutions/callback",
 	}
 
 	server()
