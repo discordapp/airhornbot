@@ -4,7 +4,6 @@ Airhorn is an example implementation of the [Discord API](https://discordapp.com
 ## Usage
 Airhorn Bot has two components, a bot client that handles the playing of loyal airhorns, and a web server that implements OAuth2 and stats. Once added to your server, airhorn bot can be summoned by running `!airhorn`.
 
-
 ### Running the Bot
 
 **First install the bot:**
@@ -26,6 +25,22 @@ First install the webserver: `go install github.com/hammerandchisel/airhornbot`,
 ```
 
 Note, the webserver requires a redis instance to track statistics
+
+## Command List
+
+`!airhorn [ default | reverb | spam | tripletap | fourtap | distant | echo | clownfull | clownshort | clownspam | highfartlong | highfartshort | midshort | truck ]`
+ 
+`!anotha [ one | one_classic | one_echo ]`
+ 
+`!cena [ airhorn | echo | full | jc | nameis | spam ]`
+ 
+`!ethan [ areyou_classic | areyou_condensed | areyou_crazy | classic | echo | high | slowandlow | cuts | beat | sodiepop ]`
+ 
+`!cow [ herd | moo | x3 ]`
+ 
+`!birthday [ horn | horn3 | sadhorn | weakhorn ]`
+ 
+`!wtc [ thatscool ]`
 
 ## Thanks
 Thanks to the awesome (one might describe them as smart... loyal... appreciative...) [iopred](https://github.com/iopred) and [bwmarrin](https://github.com/bwmarrin/discordgo) for helping code review the initial release.
