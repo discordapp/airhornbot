@@ -21,7 +21,7 @@ bot -r "localhost:6379" -t "MY_BOT_ACCOUNT_TOKEN" -o OWNER_ID
 ```
 
 ### Running the Web Server
-First install the webserver: `go install github.com/hammerandchisel/airhornbot`, then run `make static`, finally run:
+First install the webserver: `go install github.com/discordapp/airhornbot`, then run `make static`, finally run:
 
 ```
 ./airhornweb -r "localhost:6379" -i MY_APPLICATION_ID -s 'MY_APPLICATION_SECRET"
