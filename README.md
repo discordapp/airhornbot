@@ -11,8 +11,8 @@ Airhorn Bot has two components, a bot client that handles the playing of loyal a
 
 **First install the bot:**
 ```
-go get github.com/hammerandchisel/airhornbot/cmd/bot
-go install github.com/hammerandchisel/airhornbot/cmd/bot
+go get github.com/discord/airhornbot/cmd/bot
+go install github.com/discord/airhornbot/cmd/bot
 ```
  **Then run the following command:**
 
@@ -21,7 +21,7 @@ bot -r "localhost:6379" -t "MY_BOT_ACCOUNT_TOKEN" -o OWNER_ID
 ```
 
 ### Running the Web Server
-First install the webserver: `go install github.com/discordapp/airhornbot`, then run `make static`, finally run:
+First install the webserver: `go install github.com/discord/airhornbot`, then run `make static`, finally run:
 
 ```
 ./airhornweb -r "localhost:6379" -i MY_APPLICATION_ID -s 'MY_APPLICATION_SECRET"
