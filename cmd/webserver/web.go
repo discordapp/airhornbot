@@ -43,7 +43,7 @@ var (
 	htmlIndexPage string
 
 	// Base URL of the discord API
-	apiBaseUrl = "https://discordapp.com/api"
+	apiBaseUrl = "https://discord.com/api"
 )
 
 // Represents a JSON struct of stats that are updated every second and pushed to the client

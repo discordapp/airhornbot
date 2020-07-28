@@ -1,7 +1,7 @@
 const AIRHORN_URL = 'https://airhorn.solutions';
 
 export default {
-  DISCORD_URL: 'https://discordapp.com?utm_source=airhornsubtext&utm_medium=website&utm_campaign=airhorn',
+  DISCORD_URL: 'https://discord.com?utm_source=airhornsubtext&utm_medium=website&utm_campaign=airhorn',
   GITHUB_URL: 'https://github.com/discord/airhornbot',
   AIRHORN_URL,
   SMALL_ISLAND_COUNT: 12,

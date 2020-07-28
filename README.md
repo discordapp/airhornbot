@@ -1,5 +1,5 @@
 # Airhorn Bot
-Airhorn is an example implementation of the [Discord API](https://discordapp.com/developers/docs/intro). Airhorn bot utilizes the [discordgo](https://github.com/bwmarrin/discordgo) library, a free and open source library. Airhorn Bot requires Go 1.4 or higher.
+Airhorn is an example implementation of the [Discord API](https://discord.com/developers/docs/intro). Airhorn bot utilizes the [discordgo](https://github.com/bwmarrin/discordgo) library, a free and open source library. Airhorn Bot requires Go 1.4 or higher.
 
 This project is no longer active nor maintained, feel free to fork or build your own!
 
