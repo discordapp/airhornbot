@@ -15,11 +15,11 @@ export class AirhornCommand extends DiscordCommand {
     if (!interaction.member || !interaction.guild_id) {
       return discordCommandResponder.sendBackMessage("You can't trigger the bot in a direct message.", false);
     }
-    // Get the guild for the command
-    const guild = await client.guilds.fetch(interaction.guild_id);
-    if (!guild) {
+    if (!client.guilds.cache.has(interaction.guild_id)) {
       return discordCommandResponder.sendBackMessage("The bot must be in the guild too.", false);
     }
+    // Get the guild for the command
+    const guild = await client.guilds.fetch(interaction.guild_id);
     // Get the member from the command
     const guildMember = await guild.members.fetch(interaction.member.user.id);
     if (!guildMember) {
