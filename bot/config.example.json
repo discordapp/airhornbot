@@ -116,6 +116,12 @@
       "paths": [
         "gavel.opus"
       ]
+    },
+    "duck": {
+      "name": "Quack",
+      "paths": [
+        "duck_quack.opus"
+      ]
     }
   }
 }
