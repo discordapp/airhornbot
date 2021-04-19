@@ -27,7 +27,7 @@
     "react-static-plugin-sitemap": "^7.5.1",
     "react-static-plugin-source-filesystem": "^7.5.1",
     "react-static-plugin-stylus": "^7.3.0",
-    "react-tooltip": "^4.2.15"
+    "react-tooltip": "^4.2.17"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
