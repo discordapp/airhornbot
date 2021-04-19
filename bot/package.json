@@ -28,7 +28,7 @@
     "discord.js-light": "^3.5.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "ioredis": "^4.23.0",
+    "ioredis": "^4.26.0",
     "node-fetch": "^2.6.1"
   }
 }
