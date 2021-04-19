@@ -42,6 +42,16 @@
         "airhorn_truck.ogg"
       ]
     },
+    "among": {
+      "name": "Among Us",
+      "paths": [
+        "among_kill.ogg",
+        "among_meeting.ogg",
+        "among_report.ogg",
+        "among_role.ogg",
+        "among_vent.ogg"
+      ]
+    },
     "aoe": {
       "name": "AOE",
       "paths": [
