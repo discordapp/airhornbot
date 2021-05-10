@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
-    "discord.js-light": "^3.5.9",
+    "discord.js-light": "^3.5.11",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ioredis": "^4.27.1",

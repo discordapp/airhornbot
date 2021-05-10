@@ -602,10 +602,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-discord.js-light@^3.5.9:
-  version "3.5.9"
-  resolved "https://registry.yarnpkg.com/discord.js-light/-/discord.js-light-3.5.9.tgz#76f464c2fb1e4b317814e32bd56ce58b3529ecdc"
-  integrity sha512-1Z9ZfDd7K/RA6p7AZ3Mui12Tnz+QVuXgakBcvq2b1ZGR/LgdoCL9RSEET/i9vS4vDU8VD1IcRDLOyhmYpHnwlQ==
+discord.js-light@^3.5.11:
+  version "3.5.11"
+  resolved "https://registry.yarnpkg.com/discord.js-light/-/discord.js-light-3.5.11.tgz#169058ca38ddb1b58e220a7377352cf51e0f8932"
+  integrity sha512-FaOdReT+8CJsHXnjxlG7oK08uqVtIVaEXsbpS7V1O5DK6WSar29KsewkUcDHnCkU89MRhXsgNXhk7cVg0qYkGA==
   dependencies:
     discord.js "12.5.3"
 
