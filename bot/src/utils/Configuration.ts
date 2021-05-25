@@ -6,6 +6,9 @@ interface Configuration {
     applicationId: string;
     botId: string;
     token: string;
+    emojis: {
+      airhorn: string;
+    };
   };
 
   web: {
@@ -28,7 +31,11 @@ interface Configuration {
   sounds: {
     [key: string]: {
       name: string;
-      paths: string[];
+      description: string;
+      emoji: string | undefined;
+      variants: {
+        [key: string]: string;
+      };
     };
   };
 }

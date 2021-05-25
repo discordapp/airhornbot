@@ -2,7 +2,10 @@
   "discord": {
     "applicationId": "Discord application id (client id)",
     "botId": "Discord bot id (user id)",
-    "token": "Discord bot token"
+    "token": "Discord bot token",
+    "emojis": {
+      "airhorn": "846485049083559983"
+    }
   },
   "web": {
     "port": 8082,
@@ -19,128 +22,132 @@
     "maxQueueSize": 5
   },
   "sounds": {
-    "classic": {
-      "name": "Classic",
-      "paths": [
-        "airhorn_default.ogg"
-      ]
+    "airhorn": {
+      "name": "Airhorn",
+      "description": "The classic airhorn.",
+      "variants": {
+        "Default": "airhorn_default.ogg"
+      }
     },
-    "more-horn": {
+    "morehorn": {
       "name": "More Horn",
-      "paths": [
-        "airhorn_clownshort.ogg",
-        "airhorn_clownspam.ogg",
-        "airhorn_distant.ogg",
-        "airhorn_echo.ogg",
-        "airhorn_fourtap.ogg",
-        "airhorn_highfartlong.ogg",
-        "airhorn_highfartshort.ogg",
-        "airhorn_midshort.ogg",
-        "airhorn_reverb.ogg",
-        "airhorn_spam.ogg",
-        "airhorn_tripletap.ogg",
-        "airhorn_truck.ogg"
-      ]
+      "description": "What is better than one airhorn? More airhorns!",
+      "variants": {
+        "Clown Short": "airhorn_clownshort.ogg",
+        "Clown Spam": "airhorn_clownspam.ogg",
+        "Distant": "airhorn_distant.ogg",
+        "Echo": "airhorn_echo.ogg",
+        "Four Tap": "airhorn_fourtap.ogg",
+        "High Fart Long": "airhorn_highfartlong.ogg",
+        "High Fart Short": "airhorn_highfartshort.ogg",
+        "Mid Short": "airhorn_midshort.ogg",
+        "Reverb": "airhorn_reverb.ogg",
+        "Spam": "airhorn_spam.ogg",
+        "Triple Tap": "airhorn_tripletap.ogg",
+        "Truck": "airhorn_truck.ogg"
+      }
     },
     "among": {
       "name": "Among Us",
-      "paths": [
-        "among_kill.ogg",
-        "among_meeting.ogg",
-        "among_report.ogg",
-        "among_role.ogg",
-        "among_vent.ogg"
-      ]
+      "description": "That's a little sus...",
+      "variants": {
+        "Kill": "among_kill.ogg",
+        "Meeting": "among_meeting.ogg",
+        "Report": "among_report.ogg",
+        "Role": "among_role.ogg",
+        "Vent": "among_vent.ogg"
+      }
     },
     "aoe": {
       "name": "AOE",
-      "paths": [
-        "aoe.ogg"
-      ]
+      "description": "Age of Empires",
+      "variants": {
+        "AOE": "aoe.ogg"
+      }
     },
     "wow": {
       "name": "Wow",
-      "paths": [
-        "owen_wilson.opus"
-      ]
+      "description": "Wow or wow?",
+      "variants": {
+        "Owen Wilson": "owen_wilson.ogg",
+        "Wow": "wow.ogg"
+      }
     },
-    "vuvuzela": {
-      "name": "Vuvuzela",
-      "paths": [
-        "vuvuzela.ogg"
-      ]
+    "instruments": {
+      "name": "Instruments",
+      "description": "Play some instrument sounds!",
+      "variants": {
+        "Vuvuzela": "vuvuzela.ogg",
+        "Didgeridoo": "didgeridoo.ogg"
+      }
     },
-    "didgeridoo": {
-      "name": "Didgeridoo",
-      "paths": [
-        "didgeridoo.ogg"
-      ]
-    },
-    "human-man": {
+    "humanman": {
       "name": "Human Man",
-      "paths": [
-        "human_man.ogg"
-      ]
+      "description": "I won't let you get away with this!",
+      "variants": {
+        "Human Man": "human_man.ogg"
+      }
     },
-    "robot-man": {
+    "robotman": {
       "name": "Robot Man",
-      "paths": [
-        "robot_man.ogg"
-      ]
+      "description": "You'll never defeat me!",
+      "variants": {
+        "Robot Man": "robot_man.ogg"
+      }
     },
     "stan": {
       "name": "Stan",
-      "paths": [
-        "cow_herd.ogg",
-        "cow_moo.ogg",
-        "cow_x3.ogg"
-      ]
+      "description": "Mooooooooooooo",
+      "variants": {
+        "herd": "cow_herd.ogg",
+        "moo": "cow_moo.ogg",
+        "x3": "cow_x3.ogg"
+      }
     },
-    "jc": {
+    "johncena": {
       "name": "John Cena",
-      "paths": [
-        "jc_airhorn.ogg",
-        "jc_echo.ogg",
-        "jc_full.ogg",
-        "jc_jc.ogg",
-        "jc_nameis.ogg",
-        "jc_spam.ogg"
-      ]
+      "description": "Duh duh duh duh!",
+      "variants": {
+        "Airhorn": "jc_airhorn.ogg",
+        "Echo": "jc_echo.ogg",
+        "Full": "jc_full.ogg",
+        "JC": "jc_jc.ogg",
+        "Name is": "jc_nameis.ogg",
+        "Spam": "jc_spam.ogg"
+      }
     },
     "anotha": {
       "name": "Anotha",
-      "paths": [
-        "another_one.ogg",
-        "another_one_classic.ogg",
-        "another_one_echo.ogg"
-      ]
-    },
-    "ostrich": {
-      "name": "Ostrich",
-      "paths": [
-        "ostrich.opus"
-      ]
+      "description": "Another one, another one, ...",
+      "variants": {
+        "One": "another_one.ogg",
+        "Classic": "another_one_classic.ogg",
+        "Echo": "another_one_echo.ogg"
+      }
     },
     "gavel": {
       "name": "Gavel",
-      "paths": [
-        "gavel.opus"
-      ]
+      "description": "Order in the court!",
+      "variants": {
+        "Gavel": "gavel.opus"
+      }
     },
     "quack": {
       "name": "Quack",
-      "paths": [
-        "duck_quack.opus"
-      ]
+      "description": "Quack, quack, quack",
+      "variants": {
+        "Quack": "duck_quack.opus"
+      }
     },
     "villager": {
       "name": "Minecraft Villager",
-      "paths": [
-        "villager_accept.ogg",
-        "villager_deny.ogg",
-        "villager_idle.ogg",
-        "villager_trade.ogg"
-      ]
+      "description": "Hrmmm",
+      "variants": {
+        "accept": "villager_accept.ogg",
+        "deny": "villager_deny.ogg",
+        "idle": "villager_idle.ogg",
+        "trade": "villager_trade.ogg"
+      }
     }
   }
 }

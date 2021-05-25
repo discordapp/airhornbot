@@ -6,11 +6,14 @@ import {InteractionCreateListener} from "./discord/listeners/InteractionCreateLi
 import {DiscordCommand} from "./discord/DiscordCommand";
 import {AirhornCommand} from "./discord/commands/AirhornCommand";
 import {AirhornMetaCommand} from "./discord/commands/AirhornMetaCommand";
+import {DiscordButton} from "./discord/DiscordButton";
+import {PlayButton} from "./discord/buttions/PlayButton";
 
 export class AirhornBot {
 
   public readonly client: Client;
   public readonly commands: Map<string, DiscordCommand>;
+  public readonly buttons: Map<string, DiscordButton>;
 
   constructor() {
     this.client = new Client({
@@ -29,12 +32,18 @@ export class AirhornBot {
       cacheRoles: true
     });
     this.commands = new Map<string, DiscordCommand>();
+    this.buttons = new Map<string, DiscordButton>();
     // Register the listeners
     this.registerListener(new InteractionCreateListener());
     this.registerListener(new ReadyListener());
     // Register the commands
-    this.registerCommand(new AirhornCommand());
+    const soundKeys = Object.keys(config.sounds);
+    for (let i = 0; i < soundKeys.length; i++) {
+      this.registerCommand(new AirhornCommand(soundKeys[i]));
+    }
     this.registerCommand(new AirhornMetaCommand());
+    // Register the buttons
+    this.registerButton(new PlayButton());
   }
 
   async start(): Promise<void> {
@@ -47,6 +56,10 @@ export class AirhornBot {
 
   registerCommand(discordCommand: DiscordCommand): void {
     this.commands.set(discordCommand.name, discordCommand);
+  }
+
+  registerButton(discordButton: DiscordButton): void {
+    this.buttons.set(discordButton.name, discordButton);
   }
 }
 

@@ -15,12 +15,22 @@ type GuildQueueItem = {
 
 const guildQueues = new Map<string, GuildQueueItem[]>();
 
+export const soundFiles = new Map<string, Map<string, string>>();
+export const soundVariants = new Map<string, string[]>();
+
 const soundsKeys = Object.keys(config.sounds);
-for (const index in soundsKeys) {
-  const key = soundsKeys[index];
-  const sound = config.sounds[key].paths;
-  for (const fileName of sound) {
-    audioBuffers[fileName] = readFileSync(path.join(__dirname, "..", "..", "sounds", fileName));
+for (const soundKeysIndex in soundsKeys) {
+  const soundKey = soundsKeys[soundKeysIndex];
+  soundFiles.set(soundKey, new Map<string, string>());
+  soundVariants.set(soundKey, []);
+  const variants = config.sounds[soundKey].variants;
+  const variantsKeys = Object.keys(variants);
+  for (const variantKeysIndex in variantsKeys) {
+    const variantKey = variantsKeys[variantKeysIndex];
+    const variantFileName = variants[variantKey];
+    audioBuffers[soundKey + "/" + variantFileName] = readFileSync(path.join(__dirname, "..", "..", "sounds", soundKey, variantFileName));
+    soundFiles.get(soundKey)?.set(variantKey.toLowerCase(), soundKey + "/" + variantFileName);
+    soundVariants.get(soundKey)?.push(variantKey);
   }
 }
 
@@ -28,18 +38,22 @@ function getGuildQueue(guildId: string): GuildQueueItem[] {
   return guildQueues.get(guildId) || [];
 }
 
-export function getFileNameForSound(soundName: string): string | undefined {
-  let fileNames;
-  // Return a random sound for no sound name or "random" sound name
-  if (soundName == null || soundName == "random") {
-    fileNames = Object.keys(audioBuffers);
-  } else if (config.sounds[soundName]) {
-    fileNames = config.sounds[soundName].paths;
-  }
-  if (fileNames == null || fileNames.length === 0) {
+export function getSound(inputSoundName: string | null, inputSoundVariant?: string): [string, string, string] | undefined {
+  // Choose sound
+  const soundsToPickFrom = (inputSoundName !== null && inputSoundName !== "random") ? [inputSoundName] : [...soundFiles.keys()];
+  const chosenSound = soundsToPickFrom[Math.floor(Math.random() * soundsToPickFrom.length)];
+  const soundVariants = soundFiles.get(chosenSound);
+  if (!soundVariants) {
     return undefined;
   }
-  return fileNames[Math.floor(Math.random() * fileNames.length)];
+  // Choose variant
+  const variantsToPickFrom = inputSoundVariant ? [inputSoundVariant] : [...soundVariants.keys()];
+  const chosenVariant = variantsToPickFrom[Math.floor(Math.random() * variantsToPickFrom.length)];
+  const soundVariantFile = soundVariants.get(chosenVariant);
+  if (!soundVariantFile) {
+    return undefined;
+  }
+  return [chosenSound, chosenVariant, soundVariantFile];
 }
 
 export async function enqueueSound(voiceChannel: VoiceChannel, soundFileName: string): Promise<void> {
@@ -83,6 +97,7 @@ async function playSound(guildId: string): Promise<void> {
         const finishHandler = () => {
           dispatcher.off("finish", finishHandler);
           if (connection) {
+            connection.off("disconnect", finishHandler);
             connection.off("error", errorHandler);
           }
           resolve();
@@ -95,16 +110,16 @@ async function playSound(guildId: string): Promise<void> {
           }
           dispatcher.off("finish", finishHandler);
           if (connection) {
+            connection.off("disconnect", finishHandler);
             connection.off("error", errorHandler);
           }
           connection = undefined;
           resolve();
         };
         // On sound finish
-        dispatcher.on("finish", () => {
-          resolve();
-        });
+        dispatcher.on("finish", finishHandler);
         if (connection) {
+          connection.on("disconnect", finishHandler);
           connection.on("error", (e: Error) => {
             console.log(e);
             if (voiceChannel) {

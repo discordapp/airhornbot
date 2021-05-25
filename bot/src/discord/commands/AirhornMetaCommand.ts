@@ -1,7 +1,8 @@
-import {Interaction, DiscordCommand, DiscordCommandResponder} from "../DiscordCommand";
+import {DiscordCommand} from "../DiscordCommand";
 import {Client} from "discord.js-light";
 import {getCountForKey, sumOfKeys} from "../../utils/RedisUtils";
 import {config} from "../../utils/Configuration";
+import {CommandInteraction, DiscordCommandResponder} from "../DiscordInteraction";
 
 export class AirhornMetaCommand extends DiscordCommand {
 
@@ -9,7 +10,7 @@ export class AirhornMetaCommand extends DiscordCommand {
     super("airhornmeta");
   }
 
-  async executeInteraction(client: Client, interaction: Interaction, discordCommandResponder: DiscordCommandResponder): Promise<void> {
+  async executeInteraction(client: Client, interaction: CommandInteraction, discordCommandResponder: DiscordCommandResponder): Promise<void> {
     if (!interaction.data.options) {
       // Fail if no options
       return;

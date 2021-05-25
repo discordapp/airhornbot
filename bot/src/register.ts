@@ -29,16 +29,60 @@ const guildId = specifiedCommandArgs[1] || undefined;
     return console.log(await response.json());
   }
 
-  const soundChoices = Object.entries(config.sounds).map((sound) => {
+  // sound commands
+  const commands: unknown[] = Object.entries(config.sounds).map((sound: [string, {
+    name: string,
+    description: string,
+    emoji: string | undefined,
+    variants: {
+      [key: string]: string
+    }
+  }]) => {
     return {
-      name: sound[1].name,
-      value: sound[0]
+      name: sound[0],
+      description: sound[1].name + ": " + sound[1].description,
+      options: sound[0] !== "airhorn" ? [
+        {
+          name: "variant",
+          description: "Spice it up with some different sounds!",
+          required: false,
+          type: 3,
+          choices: Object.entries(sound[1].variants).map((soundVariant: [string, string]) => {
+            return {
+              name: soundVariant[0],
+              value: soundVariant[0].toLowerCase()
+            };
+          })
+        }
+      ] : undefined
     };
   });
-  // Add the random choice (this shouldn't be added in the config)
-  soundChoices.push({
-    name: "Random",
-    value: "random"
+
+  // random command (this shouldn't be added in the config)
+  commands.push({
+    name: "random",
+    description: "Play a random sound.",
+  });
+
+  // airhornmeta command
+  commands.push({
+    name: "airhornmeta",
+    description: "Useful airhorn-related commands.",
+    type: 1,
+    options: [
+      {
+        name: "stats",
+        description: "See the numbers!",
+        type: 1,
+        options: []
+      },
+      {
+        name: "invite",
+        description: "Instructions for inviting the bot.",
+        type: 1,
+        options: []
+      }
+    ]
   });
 
   const response = await fetch("https://discord.com/api/v8/applications/" + config.discord.applicationId + guildUrlPart + "/commands", {
@@ -47,43 +91,7 @@ const guildId = specifiedCommandArgs[1] || undefined;
       "authorization": "Bot " + config.discord.token,
       "content-type": "application/json"
     },
-    body: JSON.stringify([
-      // airhorn command
-      {
-        "name": "airhorn",
-        "description": "Blow an airhorn in your current voice channel.",
-        "type": 1,
-        "options": [
-          {
-            "name": "sound",
-            "description": "Spice it up with some different sounds!",
-            "required": false,
-            "type": 3,
-            "choices": soundChoices
-          }
-        ]
-      },
-      // airhornmeta command
-      {
-        "name": "airhornmeta",
-        "description": "Useful airhorn-related commands.",
-        "type": 1,
-        "options": [
-          {
-            "name": "stats",
-            "description": "See the numbers!",
-            "type": 1,
-            "options": []
-          },
-          {
-            "name": "invite",
-            "description": "Instructions for inviting the bot.",
-            "type": 1,
-            "options": []
-          }
-        ]
-      }
-    ])
+    body: JSON.stringify(commands)
   });
 
   console.log(await response.json());
