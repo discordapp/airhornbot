@@ -50,6 +50,7 @@
     "among": {
       "name": "Among Us",
       "description": "That's a little sus...",
+      "emoji": "847131936845725696",
       "variants": {
         "Kill": "among_kill.ogg",
         "Meeting": "among_meeting.ogg",
@@ -61,6 +62,7 @@
     "aoe": {
       "name": "AOE",
       "description": "Age of Empires",
+      "emoji": "847140709537546282",
       "variants": {
         "AOE": "aoe.ogg"
       }
@@ -68,6 +70,7 @@
     "wow": {
       "name": "Wow",
       "description": "Wow!",
+      "emoji": "847141775188688966",
       "variants": {
         "Owen Wilson": "owen_wilson.ogg"
       }
@@ -75,6 +78,7 @@
     "instruments": {
       "name": "Instruments",
       "description": "Play some instrument sounds!",
+      "emoji": "847138944234684436",
       "variants": {
         "Vuvuzela": "vuvuzela.ogg",
         "Didgeridoo": "didgeridoo.ogg"
@@ -83,6 +87,7 @@
     "humanman": {
       "name": "Human Man",
       "description": "I won't let you get away with this!",
+      "emoji": "847138944222625802",
       "variants": {
         "Human Man": "human_man.ogg"
       }
@@ -90,6 +95,7 @@
     "robotman": {
       "name": "Robot Man",
       "description": "You'll never defeat me!",
+      "emoji": "847138943849988128",
       "variants": {
         "Robot Man": "robot_man.ogg"
       }
@@ -97,6 +103,7 @@
     "stan": {
       "name": "Stan",
       "description": "Mooooooooooooo",
+      "emoji": "847138944227213332",
       "variants": {
         "herd": "cow_herd.ogg",
         "moo": "cow_moo.ogg",
@@ -106,6 +113,7 @@
     "johncena": {
       "name": "John Cena",
       "description": "Duh duh duh duh!",
+      "emoji": "847139458804482089",
       "variants": {
         "Airhorn": "jc_airhorn.ogg",
         "Echo": "jc_echo.ogg",
@@ -118,6 +126,7 @@
     "anotha": {
       "name": "Anotha",
       "description": "Another one, another one, ...",
+      "emoji": "847140709919883315",
       "variants": {
         "One": "another_one.ogg",
         "Classic": "another_one_classic.ogg",
@@ -127,6 +136,7 @@
     "gavel": {
       "name": "Gavel",
       "description": "Order in the court!",
+      "emoji": "847138946446000158",
       "variants": {
         "Gavel": "gavel.opus"
       }
@@ -134,6 +144,7 @@
     "quack": {
       "name": "Quack",
       "description": "Quack, quack, quack",
+      "emoji": "847138944264044554",
       "variants": {
         "Quack": "duck_quack.opus"
       }
@@ -141,6 +152,7 @@
     "villager": {
       "name": "Minecraft Villager",
       "description": "Hrmmm",
+      "emoji": "847138944302055455",
       "variants": {
         "accept": "villager_accept.ogg",
         "deny": "villager_deny.ogg",
