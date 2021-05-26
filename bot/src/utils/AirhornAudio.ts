@@ -15,7 +15,9 @@ type GuildQueueItem = {
 
 const guildQueues = new Map<string, GuildQueueItem[]>();
 
-export const soundFiles = new Map<string, Map<string, string>>();
+// Map of the sound name, with an inner map of the name of the variant and the sound file path
+const soundFiles = new Map<string, Map<string, string>>();
+// Map of the sound name, with the values being an array of the names of the variants for that sound
 export const soundVariants = new Map<string, string[]>();
 
 const soundsKeys = Object.keys(config.sounds);
@@ -38,7 +40,11 @@ function getGuildQueue(guildId: string): GuildQueueItem[] {
   return guildQueues.get(guildId) || [];
 }
 
-export function getSound(inputSoundName: string | null, inputSoundVariant?: string): [string, string, string] | undefined {
+export function getSound(inputSoundName: string | null, inputSoundVariant?: string): {
+  sound: string;
+  variant: string;
+  variantFile: string;
+} | undefined {
   // Choose sound
   const soundsToPickFrom = (inputSoundName !== null && inputSoundName !== "random") ? [inputSoundName] : [...soundFiles.keys()];
   const chosenSound = soundsToPickFrom[Math.floor(Math.random() * soundsToPickFrom.length)];
@@ -53,7 +59,11 @@ export function getSound(inputSoundName: string | null, inputSoundVariant?: stri
   if (!soundVariantFile) {
     return undefined;
   }
-  return [chosenSound, chosenVariant, soundVariantFile];
+  return {
+    sound: chosenSound,
+    variant: chosenVariant,
+    variantFile: soundVariantFile
+  };
 }
 
 export async function enqueueSound(voiceChannel: VoiceChannel, soundFileName: string): Promise<void> {

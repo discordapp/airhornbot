@@ -8,6 +8,7 @@ import {AirhornCommand} from "./discord/commands/AirhornCommand";
 import {AirhornMetaCommand} from "./discord/commands/AirhornMetaCommand";
 import {DiscordButton} from "./discord/DiscordButton";
 import {PlayButton} from "./discord/buttons/PlayButton";
+import {SoundboardCommand} from "./discord/commands/SoundboardCommand";
 
 export class AirhornBot {
 
@@ -42,6 +43,7 @@ export class AirhornBot {
       this.registerCommand(new AirhornCommand(soundKeys[i]));
     }
     this.registerCommand(new AirhornMetaCommand());
+    this.registerCommand(new SoundboardCommand());
     // Register the buttons
     this.registerButton(new PlayButton());
   }

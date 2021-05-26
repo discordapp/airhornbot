@@ -41,7 +41,7 @@ const guildId = specifiedCommandArgs[1] || undefined;
     return {
       name: sound[0],
       description: sound[1].name + ": " + sound[1].description,
-      options: sound[0] !== "airhorn" ? [
+      options: [
         {
           name: "variant",
           description: "Spice it up with some different sounds!",
@@ -54,8 +54,30 @@ const guildId = specifiedCommandArgs[1] || undefined;
             };
           })
         }
-      ] : undefined
+      ]
     };
+  });
+
+  // soundboard command
+  commands.push({
+    name: "soundboard",
+    description: "Show a soundboard for a specific sound.",
+    options: [
+      {
+        name: "sound",
+        description: "Choose the sound.",
+        required: false,
+        type: 3,
+        choices: Object.entries(config.sounds).map((sound: [string, {
+          name: string;
+        }]) => {
+          return {
+            name: sound[1].name,
+            value: sound[0]
+          };
+        })
+      }
+    ]
   });
 
   // random command (this shouldn't be added in the config)
@@ -68,7 +90,6 @@ const guildId = specifiedCommandArgs[1] || undefined;
   commands.push({
     name: "airhornmeta",
     description: "Useful airhorn-related commands.",
-    type: 1,
     options: [
       {
         name: "stats",

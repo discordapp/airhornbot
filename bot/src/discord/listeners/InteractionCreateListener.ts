@@ -3,8 +3,7 @@ import {DiscordCommand} from "../DiscordCommand";
 import {AirhornBot} from "../../bot";
 import {
   DiscordCommandResponder, Interaction,
-  InteractionComponentCustomIdData,
-  InteractionDataComponent
+  InteractionComponentCustomIdData
 } from "../DiscordInteraction";
 import {DiscordButton} from "../DiscordButton";
 
@@ -22,15 +21,14 @@ export class InteractionCreateListener extends DiscordListener {
           // Execute the command
           await (airhornBot.commands.get(commandName) as DiscordCommand).executeInteraction(airhornBot.client, interaction, new DiscordCommandResponder(interaction.id, interaction.token));
         } else if (interaction.type === 3) { // Components
-          const interactionComponentData = (interaction.data as InteractionDataComponent);
           let interactionCustomIdParsed;
           try {
-            interactionCustomIdParsed = JSON.parse(interactionComponentData.custom_id) as InteractionComponentCustomIdData;
+            interactionCustomIdParsed = JSON.parse(interaction.data.custom_id) as InteractionComponentCustomIdData;
           } catch (e) {
             // Ignore invalid JSON
           }
           if (interactionCustomIdParsed) {
-            if (interactionComponentData.component_type === 2) { // Button
+            if (interaction.data.component_type === 2) { // Button
               if (!airhornBot.buttons.has(interactionCustomIdParsed.name)) {
                 return new DiscordCommandResponder(interaction.id, interaction.token).sendBackMessage("The button requested was not understood.", false);
               }

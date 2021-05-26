@@ -3,11 +3,10 @@ import {Client} from "discord.js-light";
 import {config} from "../../utils/Configuration";
 import {
   CommandInteraction,
-  convertButtonsIntoButtonGrid,
-  DiscordCommandResponder, DiscordComponent,
+  DiscordCommandResponder,
   InteractionCommandOption
 } from "../DiscordInteraction";
-import {enqueueSound, getSound, soundVariants} from "../../utils/AirhornAudio";
+import {enqueueSound, getSound} from "../../utils/AirhornAudio";
 import {trackPlay} from "../../utils/StatsTracker";
 
 export class AirhornCommand extends DiscordCommand {
@@ -44,36 +43,6 @@ export class AirhornCommand extends DiscordCommand {
         }
       });
     }
-    if (!soundVariant && this.name !== "random" && this.name !== "airhorn") {
-      if (!soundVariants.has(interaction.data.name)) {
-        return discordCommandResponder.sendBackMessage("The sound specified was not found.", false);
-      }
-      const buttons: DiscordComponent[] = [];
-      const soundVariantNames = soundVariants.get(interaction.data.name) || [];
-      for (let i = 0; i < soundVariantNames.length; i++) {
-        buttons.push({
-          type: 2,
-          style: 1,
-          label: soundVariantNames[i],
-          custom_id: JSON.stringify({
-            name: "play",
-            soundName: this.name,
-            soundVariant: soundVariantNames[i].toLowerCase()
-          })
-        });
-      }
-      buttons.push({
-        type: 2,
-        style: 3,
-        label: "Random",
-        custom_id: JSON.stringify({
-          name: "play",
-          soundName: this.name
-        })
-      });
-      const fullComponents = convertButtonsIntoButtonGrid(buttons);
-      return discordCommandResponder.sendBackMessage("Here's the menu for that sound.", true, fullComponents);
-    }
     const voiceChannel = guildMember.voice.channel;
     if (!voiceChannel) {
       return discordCommandResponder.sendBackMessage("You need to be in a voice channel.", false);
@@ -96,7 +65,6 @@ export class AirhornCommand extends DiscordCommand {
     if (!sound) {
       return discordCommandResponder.sendBackMessage("The sound specified was not found.", false);
     }
-    const [soundNameOutput, soundVariantOutput, soundFileOutput] = sound;
     // Don't await this, play the sound ASAP
 
     discordCommandResponder.sendBackMessage("Dispatching sound...", true, [
@@ -109,8 +77,8 @@ export class AirhornCommand extends DiscordCommand {
             label: "Replay",
             custom_id: JSON.stringify({
               name: "play",
-              soundName: soundNameOutput,
-              soundVariant: soundVariantOutput
+              soundName: sound.sound,
+              soundVariant: sound.variant
             }),
             emoji: config.sounds[this.name].emoji ? {
               id: String(config.sounds[this.name].emoji)
@@ -121,8 +89,8 @@ export class AirhornCommand extends DiscordCommand {
         ]
       }
     ]);
-    trackPlay(guild.id, voiceChannel.id, guildMember.id, soundNameOutput);
+    trackPlay(guild.id, voiceChannel.id, guildMember.id, sound.sound);
     // Dispatch the sound
-    enqueueSound(voiceChannel, soundFileOutput);
+    enqueueSound(voiceChannel, sound.variantFile);
   }
 }

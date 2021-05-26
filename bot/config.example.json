@@ -67,10 +67,9 @@
     },
     "wow": {
       "name": "Wow",
-      "description": "Wow or wow?",
+      "description": "Wow!",
       "variants": {
-        "Owen Wilson": "owen_wilson.ogg",
-        "Wow": "wow.ogg"
+        "Owen Wilson": "owen_wilson.ogg"
       }
     },
     "instruments": {
